@@ -1,10 +1,12 @@
 import { Pipe, PipeTransform } from "@angular/core";
 import { Student } from "./student";
 @Pipe({
-  name: 'filterStudent'
+  name: 'filterStudent',
+  pure: false
 })
 export class FileterPipe implements PipeTransform{
   transform(students: Student[], filterText: string) {
+    console.log('Filter pipe called!');
     if(students.length === 0 || filterText === ``){
     return students;
     } else {

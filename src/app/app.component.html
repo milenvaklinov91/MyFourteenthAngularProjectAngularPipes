@@ -6,7 +6,10 @@
     [(ngModel)]="filterText">
   </div>
 
-  <table id="student">
+  <div>
+    <h3>Total Students: {{totalStudents | async}}</h3>
+  </div>
+  <table id="student" (mousemove)="onMouseMove()">
     <tr>
       <th>Name</th>
       <th>Course</th>
@@ -15,13 +18,14 @@
       <th>DOB</th>
       <th>Gender</th>
     </tr>
-      <tr *ngFor="let std of students | filterStudent: filterText">
+      <tr *ngFor="let std of filteredStudents">
+      <!-- <tr *ngFor="let std of students | filterStudent: filterText"> -->
         <!-- Here we are iterating over students array -->
         <!-- Have to remember that Anugular recommends not to use pipes to filer and sort data!
         Because Pipe can significantly impact the performance of the application if not implementet carefully -->
         <td>{{std.name}}</td>
         <td>{{std.course}}</td>
-        <td>{{std.marks }}</td>
+        <td><input type="number" value="std.marks" [(ngModel)]="std.marks"></td>
         <td>{{std.marks | percentage: totalMarks : 3 }}</td>
         <!-- Here have used thhat CUSTOM PIPE which we created!!
         and we are passing this totalMarks as an argument  -->
@@ -40,4 +44,7 @@
         This is the use of a pipe,we use pipe to transfor data or format data -->
       </tr>
   </table>
+  <br><br>
+  <button (click)="AddDummyStudent()">Add Student</button>
+  <button (click)="ChangeGender()">Change Gender</button>
 </div>

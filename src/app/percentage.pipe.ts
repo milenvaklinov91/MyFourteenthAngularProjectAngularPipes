@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 //We have to use @Pipe() decorator
 @Pipe({
-  name: 'percentage'
+  name: 'percentage',
+  pure: false //Now the pipe is impure
 })
 export class PercentagePipe implements PipeTransform{
   //This PipeTransform interface provides a method called transform(),so inside the class
@@ -11,6 +12,7 @@ export class PercentagePipe implements PipeTransform{
   // transform(value: number, totalmarks: number){
   transform(value: number, totalmarks: number, decimal: number){
     //we can specify as many parameters as we want
+      console.log('percentage pipe called!');
       return (value / totalmarks * 100).toFixed(decimal);
       //First argument method receives the value on which we are using the pipe
       //rest receive arguments which we have specified for that pipe
